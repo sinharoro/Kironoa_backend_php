@@ -1,0 +1,31 @@
+const API_URL = 'http://localhost/final-exam';
+
+// ── SEND a message (was: supabase.from('messages').insert(...)) ──
+async function sendMessage(nickname, message) {
+  const res = await fetch(`${API_URL}/save_message.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nickname, message }),
+  });
+  return res.json();
+}
+
+// ── FETCH all messages (was: supabase.from('messages').select('*')) ──
+async function getMessages() {
+  const res = await fetch(`${API_URL}/get_messages.php`);
+  return res.json();
+}
+
+// ── Example usage in a React component ──
+function handleSubmit(e) {
+  e.preventDefault();
+  sendMessage(nickname, message)
+    .then(data => {
+      if (data.success) {
+        setSuccess('Message sent!');
+        getMessages().then(setMessages);
+      } else {
+        setError(data.error);
+      }
+    });
+}

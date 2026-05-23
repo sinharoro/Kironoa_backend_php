@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS kironoa_db;
+USE kironoa_db;
+
+CREATE TABLE messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nickname VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
